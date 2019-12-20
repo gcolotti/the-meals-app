@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import CategoriesGridTile from '../components/CategoryGridTile';
 import { CATEGORIES } from './../data/dummy-data';
 
@@ -26,7 +26,8 @@ const CategoriesScreen = props => {
             keyExtractor={(item, index) => item.id}
             data={CATEGORIES}
             renderItem={renderGridItem}
-            numColumns={2} />
+            numColumns={2}
+        />
     );
 }
 
