@@ -17,6 +17,12 @@ const defaultOptions = {
     headerStyle: {
         backgroundColor: Colors.primaryColor,
     },
+    headerTitleStyle: {
+        fontFamily: 'ubuntu-regular',
+    },
+    headerBackTitleStlye: {
+        fontFamily: 'ubuntu-regular',
+    },
     headerTintColor: 'white'
 };
 
@@ -72,13 +78,30 @@ const MealsFavTabNavigator = Platform.OS === 'android' ?
 
 const FiltersNavigator = createStackNavigator({
     Filters: FiltersScreen,
+}, {
+    defaultNavigationOptions: defaultOptions,
 });
 
 const mainNavigator = createDrawerNavigator({
-    MealsFavs: MealsFavTabNavigator,
-    Filters: FiltersNavigator,
+    MealsFavs: {
+        screen: MealsFavTabNavigator,
+        navigationOptions: {
+            drawerLabel: 'Meals',
+        }
+    },
+    Filters: {
+        screen: FiltersNavigator,
+        navigationOptions: {
+            drawerLabel: 'Filters',
+        }
+    }
 }, {
-
+    contentOptions: {
+        activeTintColor: Colors.accentColor,
+        labelStyle: {
+            fontFamily: 'ubuntu-bold',
+        }
+    }
 });
 
 export default createAppContainer(mainNavigator);

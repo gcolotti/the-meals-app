@@ -11,8 +11,10 @@ const fetchFonts = () => {
   return Font.loadAsync({
     'ubuntu-regular': require('./assets/fonts/Ubuntu-Regular.ttf'),
     'ubuntu-bold': require('./assets/fonts/Ubuntu-Bold.ttf'),
+    'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   })
-}
+};
 
 export default function App() {
 
@@ -30,17 +32,4 @@ export default function App() {
   return (
     <MealsNavigator />
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 18,
-    fontFamily: 'ubuntu-bold',
-  }
-});
+};
