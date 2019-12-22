@@ -3,7 +3,7 @@ import { Text, StyleSheet } from 'react-native';
 
 const DefaultText = props => {
     return (
-        <Text style={styles.text}>
+        <Text style={{...styles.text, ...props.style}}>
             {props.children}
         </Text>
     );
