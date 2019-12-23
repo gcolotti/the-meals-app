@@ -2,31 +2,37 @@ import React from 'react';
 import { View, Button, StyleSheet, ScrollView, Image } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from './../components/CustomHeaderButton';
+import { useSelector } from 'react-redux';
 import DefaultText from './../components/DefaultText';
 import ListItem from '../components/ListItem';
 
 const MealDetailScreen = props => {
-    const meal = props.navigation.getParam('meal');
+
+    const availableMeals = useSelector(state => state.meals.meals);
+
+    const mealId = props.navigation.getParam('mealId');
+    
+    const selectedMeal = availableMeals.filter(meal => meal.id === mealId);
 
     return (
         <ScrollView>
-            <Image source={{ uri: meal.imageUrl }} style={styles.image} />
+            <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
             <View style={styles.details}>
-                <DefaultText>{meal.duration}m</DefaultText>
-                <DefaultText>{meal.complexity.toUpperCase()}</DefaultText>
-                <DefaultText>{meal.affordability.toUpperCase()}</DefaultText>
+                <DefaultText>{selectedMeal.duration}m</DefaultText>
+                <DefaultText>{selectedMeal.complexity.toUpperCase()}</DefaultText>
+                <DefaultText>{selectedMeal.affordability.toUpperCase()}</DefaultText>
             </View>
             <DefaultText style={styles.title}>Ingredients</DefaultText>
-            {meal.ingredients.map(ingredient => <ListItem key={ingredient}>{ingredient}</ListItem>)}
+            {selectedMeal.ingredients.map(ingredient => <ListItem key={ingredient}>{ingredient}</ListItem>)}
             <DefaultText style={styles.title}>Steps</DefaultText>
-            {meal.steps.map(step => <ListItem key={step}>{step}</ListItem>)}
+            {selectedMeal.steps.map(step => <ListItem key={step}>{step}</ListItem>)}
             <Button title={'Back to main screen'} onPress={() => {
                 props.navigation.popToTop();
             }
             } />
         </ScrollView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     image: {
@@ -39,17 +45,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     title: {
-        fontFamily: 'ubuntu-regular',
+        marginTop: 20,
+        marginBottom: 10,
+        fontFamily: 'ubuntu-bold',
         fontSize: 22,
         textAlign: 'center',
     }
 });
 
 MealDetailScreen.navigationOptions = navigationData => {
-    const meal = navigationData.navigation.getParam('meal');
 
     return {
-        headerTitle: meal.title,
         headerRight: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
                 title={'ww'}

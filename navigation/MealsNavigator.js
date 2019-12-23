@@ -41,7 +41,12 @@ const FavoritesMealsNavigator = createStackNavigator({
     MealDetail: MealDetailScreen,
 
 }, {
-    defaultNavigationOptions: defaultOptions,
+    defaultNavigationOptions: {
+        ...defaultOptions,
+        headerStyle: {
+            backgroundColor: Colors.accentColor,
+        }
+    },
 });
 
 const tabsConfig = {
@@ -77,7 +82,7 @@ const MealsFavTabNavigator = Platform.OS === 'android' ?
     });
 
 const FiltersNavigator = createStackNavigator({
-    Filters: FiltersScreen,
+    Filters: FiltersScreen
 }, {
     defaultNavigationOptions: defaultOptions,
 });
