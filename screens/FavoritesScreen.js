@@ -3,7 +3,6 @@ import MealList from './../components/MealList';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector } from 'react-redux';
 import CustomHeaderButton from './../components/CustomHeaderButton';
-import { MEALS } from './../data/dummy-data';
 
 const FavoritesScreen = props => {
 

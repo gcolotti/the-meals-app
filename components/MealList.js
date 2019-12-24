@@ -5,6 +5,7 @@ import MealItem from './../components/MealItem';
 const MealList = props => {
 
     const renderMealItem = itemData => {
+
         return (
             <MealItem
                 title={itemData.item.title}
@@ -16,12 +17,14 @@ const MealList = props => {
                     props.navigation.navigate({
                         routeName: 'MealDetail',
                         params: {
-                            mealId: itemData.item.id
+                            mealId: itemData.item.id,
+                            mealTitle: itemData.item.title
                         }
                     })
-                }}/>
+                }}
+            />
         );
-    }
+    };
 
     return (
         <View style={styles.list}>
@@ -33,7 +36,7 @@ const MealList = props => {
             />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     list: {
