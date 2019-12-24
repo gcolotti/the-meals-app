@@ -13,6 +13,8 @@ const MealDetailScreen = props => {
 
     const mealId = props.navigation.getParam('mealId');
 
+    const currentMealIsFavorite = useSelector(state => state.meals.favoriteMeals.some(meal => meal.id === mealId))
+
     const selectedMeal = availableMeals.find(meal => meal.id === mealId);
 
     const dispatch = useDispatch();
@@ -21,9 +23,13 @@ const MealDetailScreen = props => {
         dispatch(toogleFavorite(mealId));
     }, [dispatch, mealId]);
 
-    useEffect(() => {       
+    useEffect(() => {
         props.navigation.setParams({ toogleFav: toogleFavotireHandler })
     }, [toogleFavotireHandler]);
+
+    useEffect(() => {
+        props.navigation.setParams({ isFav: currentMealIsFavorite })
+    }, [currentMealIsFavorite]);
 
     // useEffect(() => {
     //     props.navigation.setParams({ mealTitle: selectedMeal.title });
@@ -75,13 +81,14 @@ MealDetailScreen.navigationOptions = navigationData => {
 
     const mealTitle = navigationData.navigation.getParam('mealTitle');
     const toogleFav = navigationData.navigation.getParam('toogleFav')
+    const isFav = navigationData.navigation.getParam('isFav');
 
     return {
         headerTitle: mealTitle,
         headerRight: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
-                title={'ww'}
-                iconName={'ios-star-outline'}
+                title={'Add/remove from Favorites'}
+                iconName={isFav? 'ios-star' : 'ios-star-outline'}
                 onPress={toogleFav}
             />
         </HeaderButtons>
